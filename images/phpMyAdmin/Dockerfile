@@ -9,6 +9,8 @@ COPY config.inc.php /tmp/
 RUN rm /www/index.html && mv /usr/share/webapps/phpmyadmin/* /www/ && \
     mv /tmp/config.inc.php /www/ && chown -R www:www /www/
 
+RUN mkdir /www/tmp && chown www:www /www/tmp && chmod 777 /www/tmp
+
 COPY nginx.conf /etc/nginx/
 
 
