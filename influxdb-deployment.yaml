@@ -1,4 +1,17 @@
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pv-claim
+  labels:
+    app: influxdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   annotations:
@@ -15,7 +28,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c-influxdb
+  name: influxdb
   labels:
     app: influxdb
 spec:
@@ -32,3 +45,10 @@ spec:
       - image: myinfluxdb
         imagePullPolicy: Never
         name: influxdb
+        volumeMounts:
+        - name: influxdb-persistent-storage
+          mountPath: /root/.influxdbv2
+      volumes:
+      - name: influxdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pv-claim

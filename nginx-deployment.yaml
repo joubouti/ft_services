@@ -14,6 +14,9 @@ spec:
     port: 443
     targetPort: 443
     protocol: TCP
+  - name: ftps
+    port: 22
+    targetPort: 22
   selector:
     app: nginx
   type: LoadBalancer
@@ -21,7 +24,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: c-nginx
+  name: nginx
   labels:
     app: nginx
 spec:

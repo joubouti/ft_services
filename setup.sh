@@ -23,16 +23,15 @@ kubectl delete svc/nginx
 kubectl delete svc/mysql
 kubectl delete svc/grafana
 kubectl delete svc/influxdb
-kubectl delete deploy/c-wp
-kubectl delete deploy/c-pma
-kubectl delete deploy/c-nginx
-kubectl delete deploy/c-mysql
-kubectl delete deploy/c-telegraf
-kubectl delete deploy/c-influxdb
-kubectl delete deploy/c-grafana
+kubectl delete deploy/wordpress
+kubectl delete deploy/phpmyadmin
+kubectl delete deploy/nginx
+kubectl delete deploy/mysql
+kubectl delete deploy/telegraf
+kubectl delete deploy/influxdb
+kubectl delete deploy/grafana
 
 
-kubectl apply -f metallb-config.yaml  
 kubectl apply -f nginx-deployment.yaml  
 kubectl apply -f mysql-deployment.yaml  
 kubectl apply -f wordpress-deployment.yaml 
@@ -40,3 +39,4 @@ kubectl apply -f phpmyadmin-deployment.yaml
 kubectl apply -f grafana-deployment.yaml
 kubectl apply -f influxdb-deployment.yaml
 kubectl apply -f telegraf-deployment.yaml
+kubectl apply -f metallb-config.yaml  
