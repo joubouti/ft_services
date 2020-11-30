@@ -14,8 +14,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    metallb.universe.tf/allow-shared-ip: shared
   name: influxdb
 spec:
   ports:
@@ -23,7 +21,7 @@ spec:
     targetPort: 8086
   selector:
     app: influxdb
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -45,6 +43,8 @@ spec:
       containers:
       - image: myinfluxdb
         imagePullPolicy: Never
+        ports:
+        - containerPort: 8086
         name: influxdb
         volumeMounts:
         - name: influxdb-persistent-storage

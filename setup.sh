@@ -15,6 +15,7 @@ minikube start	--vm-driver=virtualbox \
 eval $(minikube docker-env)
 
 minikube addons enable metallb
+minikube addons enable dashboard
 
 eval $(minikube docker-env)
 

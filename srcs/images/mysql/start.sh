@@ -15,6 +15,7 @@ else
                         -e "CREATE DATABASE phpmyadmin;"
 
         mysql -uroot -p1234 wordpress < /tmp/wordpress.sql
+        mysql -uroot -p1234 phpmyadmin < /tmp/phpmyadmin.sql
 
         # echo HELLO > /tmp/HELLO
 

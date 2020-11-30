@@ -7,6 +7,7 @@ RUN mkdir /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 COPY start.sh /tmp/
 COPY wordpress.sql /tmp/
+COPY phpmyadmin.sql /tmp/
 
 # RUN sh /tmp/start.sh
 

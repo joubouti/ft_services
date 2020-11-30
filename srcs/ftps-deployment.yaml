@@ -11,7 +11,7 @@ spec:
   selector:
     app: ftps
   ports:
-  - name: ftp-comman
+  - name: ftp-command
     port: 21
   - name: ftp-data
     port: 20
