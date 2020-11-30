@@ -9,6 +9,7 @@ else
         cp /tmp/* /root/.influxdbv2/
 fi
 
+/influxdb/influxd &
 # influxd
 exec "$@"
 # mysql -upma_user -p1234 -h mysqlhost

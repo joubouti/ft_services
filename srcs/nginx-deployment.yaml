@@ -14,7 +14,7 @@ spec:
     port: 443
     targetPort: 443
     protocol: TCP
-  - name: ftps
+  - name: ssh
     port: 22
     targetPort: 22
   selector:

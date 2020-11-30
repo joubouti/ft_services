@@ -1,5 +1,17 @@
 #!bin/bash
 
+
+
+rm -rf ~/.minikube
+mkdir -p ~/goinfre/.minikube
+
+ln -s ~/goinfre/.minikube ~/.minikube
+
+minikube delete
+minikube start	--vm-driver=virtualbox \
+				--cpus=2 --memory 3000 \
+
+
 eval $(minikube docker-env)
 
 minikube addons enable metallb
@@ -8,14 +20,14 @@ eval $(minikube docker-env)
 
 export MINIKUBE_IP=$(minikube ip)
 
-docker build -t mynginx -f images/nginx/nginx.dockerfile images/nginx
-docker build -t main-nginx images/nginx
-docker build -t mysqldb images/mysql 
-docker build -t mywp images/wordpress
-docker build -t mypma images/phpMyAdmin
-docker build -t mytelegraf --build-arg INCOMING=${MINIKUBE_IP} images/telegraf
-docker build -t myinfluxdb images/influxdb
-docker build -t mygrafana images/grafana
+docker build -t mynginx -f srcs/images/nginx/nginx.dockerfile srcs/images/nginx
+docker build -t main-nginx srcs/images/nginx
+docker build -t mysqldb srcs/images/mysql 
+docker build -t mywp srcs/images/wordpress
+docker build -t mypma srcs/images/phpMyAdmin
+docker build -t myftps srcs/images/ftps
+docker build -t myinfluxdb --build-arg INCOMING=${MINIKUBE_IP} srcs/images/influxdb
+docker build -t mygrafana srcs/images/grafana
 
 kubectl delete svc/wordpress
 kubectl delete svc/phpmyadmin
@@ -27,16 +39,16 @@ kubectl delete deploy/wordpress
 kubectl delete deploy/phpmyadmin
 kubectl delete deploy/nginx
 kubectl delete deploy/mysql
-kubectl delete deploy/telegraf
 kubectl delete deploy/influxdb
 kubectl delete deploy/grafana
+kubectl delete deploy/ftps
 
 
-kubectl apply -f nginx-deployment.yaml  
-kubectl apply -f mysql-deployment.yaml  
-kubectl apply -f wordpress-deployment.yaml 
-kubectl apply -f phpmyadmin-deployment.yaml
-kubectl apply -f grafana-deployment.yaml
-kubectl apply -f influxdb-deployment.yaml
-kubectl apply -f telegraf-deployment.yaml
-kubectl apply -f metallb-config.yaml  
+kubectl apply -f srcs/nginx-deployment.yaml  
+kubectl apply -f srcs/mysql-deployment.yaml  
+kubectl apply -f srcs/wordpress-deployment.yaml 
+kubectl apply -f srcs/phpmyadmin-deployment.yaml
+kubectl apply -f srcs/grafana-deployment.yaml
+kubectl apply -f srcs/influxdb-deployment.yaml
+kubectl apply -f srcs/ftps-deployment.yaml
+kubectl apply -f srcs/metallb-config.yaml  
