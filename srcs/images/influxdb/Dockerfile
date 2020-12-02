@@ -22,5 +22,4 @@ COPY telegraf.conf /telegraf/etc/telegraf/telegraf.conf
 # /influxdb/influx setup -u admin -p 123456789 -o 1337 -b mybucket -f' >> /tmp/setup.sh && sh /tmp/setup.sh
 VOLUME /root/.influxdbv2
 # curl -k --cacert $CA_CERT -H "Authorization: Bearer $TOKEN" https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/default/pods
-ENTRYPOINT ["sh", "/root/start.sh"]
-CMD /telegraf/usr/bin/telegraf --config /telegraf/etc/telegraf/telegraf.conf
+CMD ["sh", "/root/start.sh"]

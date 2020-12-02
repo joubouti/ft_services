@@ -2,7 +2,7 @@ FROM mynginx
 # VOLUME /sys/fs/cgroup
 RUN rm /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY setup.sh /tmp
+COPY start.sh /tmp
 
 RUN apk --update add --no-cache openssh bash \
   && sed -i s/#PermitRootLogin.*/PermitRootLogin\ yes/ /etc/ssh/sshd_config \
@@ -17,4 +17,4 @@ RUN apk --update add --no-cache openssh bash \
   && /usr/bin/ssh-keygen -A \
   && ssh-keygen -t rsa -b 4096 -f  /etc/ssh/ssh_host_key
 
-CMD ["sh", "/tmp/setup.sh"]
+CMD ["sh", "/tmp/start.sh"]

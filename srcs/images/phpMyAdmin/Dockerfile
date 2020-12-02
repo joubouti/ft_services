@@ -5,7 +5,7 @@ FROM mynginx
 RUN apk add phpmyadmin && apk add php7-fpm
 
 COPY config.inc.php /tmp/
-
+COPY start.sh /tmp/
 RUN rm /www/index.html && mv /usr/share/webapps/phpmyadmin/* /www/ && \
     mv /tmp/config.inc.php /www/ && chown -R www:www /www/
 
@@ -14,4 +14,4 @@ RUN mkdir /www/tmp && chown www:www /www/tmp && chmod 777 /www/tmp
 COPY nginx.conf /etc/nginx/
 
 
-ENTRYPOINT php-fpm7 && nginx -g "daemon off;"
+CMD ["sh", "/tmp/start.sh"]

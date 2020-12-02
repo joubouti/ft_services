@@ -9,7 +9,12 @@ else
         cp /tmp/* /root/.influxdbv2/
 fi
 
-/influxdb/influxd &
-# influxd
-exec "$@"
-# mysql -upma_user -p1234 -h mysqlhost
+while true; do
+    if [ -z "$(pgrep '/influxdb/influxd')"]; then
+        /influxdb/influxd &
+    fi
+    if [ -z "$(pgrep '/telegraf/usr/bin/telegraf')"]; then
+        /telegraf/usr/bin/telegraf --config /telegraf/etc/telegraf/telegraf.conf &
+    fi
+    sleep 2
+done

@@ -12,8 +12,6 @@ minikube start	--vm-driver=virtualbox \
 				--cpus=2 --memory 3000 \
 
 
-eval $(minikube docker-env)
-
 minikube addons enable metallb
 minikube addons enable dashboard
 
@@ -29,20 +27,6 @@ docker build -t mypma srcs/images/phpMyAdmin
 docker build -t myftps srcs/images/ftps
 docker build -t myinfluxdb --build-arg INCOMING=${MINIKUBE_IP} srcs/images/influxdb
 docker build -t mygrafana srcs/images/grafana
-
-kubectl delete svc/wordpress
-kubectl delete svc/phpmyadmin
-kubectl delete svc/nginx
-kubectl delete svc/mysql
-kubectl delete svc/grafana
-kubectl delete svc/influxdb
-kubectl delete deploy/wordpress
-kubectl delete deploy/phpmyadmin
-kubectl delete deploy/nginx
-kubectl delete deploy/mysql
-kubectl delete deploy/influxdb
-kubectl delete deploy/grafana
-kubectl delete deploy/ftps
 
 
 kubectl apply -f srcs/nginx-deployment.yaml  

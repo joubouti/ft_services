@@ -5,8 +5,9 @@ RUN apk add php7-fpm php7-mcrypt php7-soap php7-openssl php7-gmp php7-pdo_odbc p
 RUN cd /www && rm index.html && wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz \
     && mv wordpress/* . && rm -rf latest.tar.gz wordpress && chown -R www:www .
 COPY wp-config.php /www/
+COPY start.sh /tmp/
 
 # RUN rc-update add php-fpm7 default
 COPY nginx.conf /etc/nginx/
 
-ENTRYPOINT php-fpm7 && nginx -g "daemon off;"
+CMD ["sh", "/tmp/start.sh"]
