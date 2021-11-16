@@ -1,0 +1,2 @@
+*.cp linguist-detectable=false
+*.yaml linguist-language=yaml
