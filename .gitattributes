@@ -1,2 +1,4 @@
 *.cp linguist-detectable=false
+*.php linguist-detectable=false
+*.yaml linguist-detectable=true
 *.yaml linguist-language=YAML
